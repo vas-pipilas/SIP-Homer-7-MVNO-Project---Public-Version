@@ -1,0 +1,9 @@
+# This is a curated showcase repo -- no real credentials, IPs, or internal
+# data are ever intended to be here. Kept as a safety net regardless.
+*.pgpass
+.pgpass
+*.key
+*.env
+.DS_Store
+*.swp
+*~
