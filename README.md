@@ -1,10 +1,14 @@
 # SIP Homer 7 — Production Voice Operations Toolkit
 
+[![Public portfolio safety](https://github.com/vas-pipilas/SIP-Homer-7-MVNO-Project---Public-Version/actions/workflows/public-safety.yml/badge.svg)](https://github.com/vas-pipilas/SIP-Homer-7-MVNO-Project---Public-Version/actions/workflows/public-safety.yml)
+
 A sanitized portfolio edition of tooling built around **Homer 7**, PostgreSQL and Linux for production SIP/VoIP operations.
 
 This repository is intentionally **not a production mirror**. It demonstrates the engineering patterns, safety controls, automation and troubleshooting workflows developed for a real multi-site voice platform while replacing or removing organization-specific topology, addressing, provider names, usernames, domains, credentials and operational identifiers.
 
 > **Portfolio goal:** show how an open-source SIP capture platform can be extended into an operator-facing production toolkit with observability, recovery, deployment safety and guided lifecycle automation.
+
+**Short on time?** Start with the [`Five-Minute Portfolio Walkthrough`](docs/PORTFOLIO_WALKTHROUGH.md).
 
 ## What this project demonstrates
 
@@ -118,19 +122,31 @@ Design overview: [`docs/USER_LIFECYCLE.md`](docs/USER_LIFECYCLE.md)
 
 The public script set is deliberately curated. It demonstrates the engineering decisions without reproducing every private operational utility.
 
+## Sanitized output previews
+
+For a quick visual feel of the operator workflows:
+
+- [`examples/backup-status-preview.txt`](examples/backup-status-preview.txt)
+- [`examples/deployment-preview.txt`](examples/deployment-preview.txt)
+- [`examples/provisioning-preview.txt`](examples/provisioning-preview.txt)
+
 ## Repository layout
 
 ```text
 .
 ├── README.md
+├── .github/workflows/public-safety.yml
 ├── docs/
 │   ├── ARCHITECTURE.md
+│   ├── PORTFOLIO_WALKTHROUGH.md
 │   ├── SAFETY_AND_RECOVERY.md
 │   ├── USER_LIFECYCLE.md
 │   ├── PUBLIC_SANITIZATION.md
 │   └── case-studies/
+├── examples/
 ├── scripts/
-└── sql/
+├── sql/
+└── tools/
 ```
 
 ## Design principles
@@ -149,21 +165,17 @@ The public script set is deliberately curated. It demonstrates the engineering d
 
 **Operator UX matters.** Terminal menus use consistent sections, status colors and stronger visual treatment for privileged or high-risk operations.
 
-## Public sanitization policy
+## Publication safety
 
-All material published here is reviewed under a stricter rule than “remove passwords”. The public edition removes or generalizes:
+The repo includes an automated publication gate that performs:
 
-- organization, customer and provider names;
-- real site/datacenter names;
-- production hostnames and capture-node identifiers;
-- production IP addresses, subnets and routing prefixes;
-- employee usernames, email domains and account names;
-- private repository references;
-- production storage paths where they reveal topology;
-- operational incident/ticket identifiers;
-- credentials, hashes, tokens and secret-bearing configuration.
+- `bash -n` syntax validation for every shell script;
+- Python syntax validation;
+- rejection of real-looking email domains outside `example.com/.net/.org`;
+- rejection of IPv4 addresses outside loopback and RFC 5737 documentation ranges;
+- detection of private-key material and obvious literal-secret assignments.
 
-Generic examples use names such as `Site A`, `SBC-A1`, `Carrier Alpha`, `engineer@example.net`, RFC 5737 documentation networks and generalized filesystem roots.
+The scanner deliberately uses generic classes rather than a public denylist of private identifiers.
 
 Full policy: [`docs/PUBLIC_SANITIZATION.md`](docs/PUBLIC_SANITIZATION.md)
 
