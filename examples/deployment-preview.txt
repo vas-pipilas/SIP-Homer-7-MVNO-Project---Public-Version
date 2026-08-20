@@ -1,0 +1,21 @@
+GUARDED DEPLOYMENT REVIEW
+------------------------------------------------------------
+Repository : /opt/sip-homer-toolkit
+Branch     : main
+Commit     : 1a2b3c4
+Runtime    : /usr/local/bin
+
+DIFF: homer-callstats.sh [MODIFIED]
+------------------------------------------------------------
+--- LIVE:homer-callstats.sh
++++ GIT:homer-callstats.sh
+@@
+- old reporting behavior
++ reviewed reporting behavior
+
+[INFO] Source syntax validation passed.
+[OK] Previous runtime artifact backed up.
+[OK] Installed artifact SHA256 matches reviewed Git source.
+[OK] Deployment ledger appended with Git + checksum provenance.
+
+Representative sanitized output only. Commit IDs and paths are examples.

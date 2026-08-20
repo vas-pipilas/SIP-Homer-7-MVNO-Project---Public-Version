@@ -1,9 +1,40 @@
-# This is a curated showcase repo -- no real credentials, IPs, or internal
-# data are ever intended to be here. Kept as a safety net regardless.
+# Public portfolio safety net. Real environment data should never be copied here.
+
+# Credentials / secrets
 *.pgpass
 .pgpass
-*.key
 *.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.jks
+*.keystore
+*credentials*
+*secret*
+
+# Operational data / captures / databases
+*.pcap
+*.pcapng
+*.pcap.gz
+*.dump
+*.sql.gz
+*.sqlite
+*.db
+*.log
+*.log.gz
+*.bak
+*.backup
+
+# Generated state
+__pycache__/
+*.pyc
+.coverage
+.pytest_cache/
+
+# Editor / OS noise
 .DS_Store
 *.swp
 *~
