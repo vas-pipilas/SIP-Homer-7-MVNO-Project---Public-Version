@@ -36,10 +36,7 @@ BANNER
     echo -e "${NC}"
 }
 
-pause() {
-    echo
-    read -r -p "Press Enter to return to the menu..." _
-}
+pause() { echo; read -r -p "Press Enter to return to the menu..." _; }
 
 run_tool() {
     local tool="$1"; shift
@@ -53,11 +50,7 @@ run_tool() {
 
 show_file_tail() {
     local file="$1" lines="${2:-40}"
-    if [ -r "$file" ]; then
-        tail -n "$lines" "$file"
-    else
-        echo -e "${YELLOW}[INFO]${NC} No readable log at: $file"
-    fi
+    if [ -r "$file" ]; then tail -n "$lines" "$file"; else echo -e "${YELLOW}[INFO]${NC} No readable log at: $file"; fi
 }
 
 vm_menu() {
@@ -111,25 +104,31 @@ EOF
 EOF
 
     echo
+    echo -e "${MAGENTA}${BOLD} USER LIFECYCLE${NC}"
+    cat <<'EOF'
+  7) Guided multi-interface user provisioning  [portfolio adapters]
+EOF
+
+    echo
     echo -e "${MAGENTA}${BOLD} GIT, DEPLOYMENT & RECOVERY${NC}"
     cat <<'EOF'
-  7) Deployment status / source provenance
-  8) Curated KNOWN_GOOD restore points
-  9) Controlled rollback candidates
+  8) Deployment status / source provenance
+  9) Curated KNOWN_GOOD restore points
+ 10) Controlled rollback candidates
 EOF
 
     echo
     echo -e "${MAGENTA}${BOLD} SYSTEM ADMINISTRATION${NC}"
     cat <<'EOF'
- 10) VM / Linux system overview  >>
+ 11) VM / Linux system overview  >>
 EOF
 
     echo
     echo -e "${RED}${BOLD} PRIVILEGED WRITE PATHS${NC}"
     cat <<'EOF'
- 11) Deploy a Git-backed script       [root + explicit yes]
- 12) Promote runtime artifact         [root + explicit yes]
- 13) Execute curated rollback         [root + explicit yes]
+ 12) Deploy a Git-backed script       [root + explicit yes]
+ 13) Promote runtime artifact         [root + explicit yes]
+ 14) Execute curated rollback         [root + explicit yes]
 EOF
 
     echo
@@ -144,23 +143,24 @@ EOF
         4) header; run_tool homer-sbc-routes-summary.sh; pause ;;
         5) header; run_tool homer-db-backup-status.sh; pause ;;
         6) header; show_file_tail "${LOG_DIR}/db-backup.log" 60; pause ;;
-        7) header; run_tool homer-deploy.sh info; pause ;;
-        8) header; run_tool homer-known-good.sh list; pause ;;
-        9) header; run_tool homer-rollback.sh list; pause ;;
-        10) vm_menu ;;
-        11)
+        7) header; run_tool homer-user-provision.sh; pause ;;
+        8) header; run_tool homer-deploy.sh info; pause ;;
+        9) header; run_tool homer-known-good.sh list; pause ;;
+        10) header; run_tool homer-rollback.sh list; pause ;;
+        11) vm_menu ;;
+        12)
             header
             read -r -p "Git-backed script name (e.g. homer-callstats.sh): " file
             run_tool homer-deploy.sh deploy "$file"
             pause
             ;;
-        12)
+        13)
             header
             read -r -p "Runtime script name to curate: " file
             run_tool homer-known-good.sh promote "$file"
             pause
             ;;
-        13)
+        14)
             header
             echo -e "${RED}${BOLD}CONTROLLED ROLLBACK — CURATED KNOWN_GOOD TARGETS ONLY${NC}"
             run_tool homer-rollback.sh list
