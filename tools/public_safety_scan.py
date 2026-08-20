@@ -87,6 +87,12 @@ def main() -> int:
                 f"{rel}:{line_number(text, match.start())}: private-key material detected"
             )
 
+        # The scanner's own regex/reporting strings necessarily contain the
+        # words used by this rule. Keep scanning this file for IP/email/key
+        # material, but do not ask the secret-assignment regex to parse itself.
+        if rel == Path("tools/public_safety_scan.py"):
+            continue
+
         # Ignore documentation prose such as "password: hidden" by requiring a
         # concrete literal of at least six non-placeholder characters.
         for match in SECRET_ASSIGNMENT_RE.finditer(text):
