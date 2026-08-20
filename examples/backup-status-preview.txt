@@ -1,0 +1,15 @@
+============================================================
+DAILY DB BACKUP HEALTH REPORT
+============================================================
+Expected schedule : Sunday 03:15
+Latest backup     : backup_20260816_031500
+Backup age        : 4 day(s)
+Deep verification : PASS (2026-08-17 03:33:00)
+Immediate verify  : PASS
+
+[OK] Backup age is within weekly schedule tolerance.
+[OK] Disposable restore verification passed.
+[OK] Backup status: HEALTHY
+============================================================
+
+This is representative sanitized output. Identifiers and timestamps are examples.
