@@ -1,0 +1,28 @@
+============================================================
+|            S I P   H O M E R   C O N S O L E             |
+|              ~ Guided User Provisioning ~                 |
+============================================================
+
+PROVISIONING PLAN
+------------------------------------------------------------
+Engineer               engineer@example.net
+Application account    ALREADY PRESENT / VERIFY
+Admin-tool account     CREATE
+
+[ STEP 1 / 2 ]  APPLICATION ACCOUNT
+------------------------------------------------------------
+[OK] Existing account matches the canonical profile.
+
+[ STEP 2 / 2 ]  ADMINISTRATION ACCOUNT
+------------------------------------------------------------
+[OK] Guarded child workflow completed.
+[OK] Postcondition verification passed.
+
+FINAL PROVISIONING SUMMARY
+------------------------------------------------------------
+Application            VERIFIED EXISTING
+Administration         VERIFIED CREATED
+------------------------------------------------------------
+[OK] Provisioning complete across all configured account planes.
+
+Representative sanitized output only. No production identity is shown.
